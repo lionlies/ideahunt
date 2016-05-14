@@ -1,0 +1,18 @@
+<div class="container">
+  <h2>ideas list</h2>
+  <div>
+    <%= link_to "New idea", new_idea_path, class: "btn btn-info btn-md" %>
+  </div>
+  <br>
+  <table class="table table-bordered">
+    <% @ideas.each do |idea| %>
+      <tr>
+        <td class="col-md-1"><%= pluralize(idea.votes.count, "vote") %></td>
+        <td class="col-md-1"><%= link_to "+1", upvote_idea_path(idea), method: :post,
+                        class: "btn btn-primary btn-xs" %></td>
+        <td class="col-md-2"><%= link_to idea.title, idea_path(idea) %></td>
+        <td class="col-md-6"><%= idea.description %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

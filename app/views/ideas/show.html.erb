@@ -1,0 +1,23 @@
+<div class="container">
+
+  <h2>
+    <%= @idea.title %>
+  </h2>
+
+  <div>
+    <%= link_to "+1", upvote_idea_path(@idea), method: :post,
+                    class: "btn btn-primary btn-sm" %>
+    <%= pluralize(@idea.votes.count, "vote") %>
+  </div>
+
+  <td><%= link_to "Delete", @idea, method: :delete,
+                  class: "btn btn-danger btn-sm pull-right",
+                  data: {confirm: "Are you sure?"} %></td>
+  <td><%= link_to "Edit", edit_idea_path(@idea),
+                  class: "btn btn-warning btn-sm pull-right" %></td>
+
+  <div>
+    <%= @idea.description %>
+  </div>
+
+</div>
