@@ -4,15 +4,24 @@
     <%= link_to "New idea", new_idea_path, class: "btn btn-info btn-md" %>
   </div>
   <br>
-  <table class="table table-bordered">
+  <table class="table table-hover">
+    <tbody>
     <% @ideas.each do |idea| %>
       <tr>
-        <td class="col-md-1" ><%= pluralize(idea.votes.count, "vote") %></td>
-        <td class="col-md-1"><%= link_to "+1", upvote_idea_path(idea), method: :post,
-                        class: "btn btn-primary btn-xs" %></td>
-        <td class="col-md-2"><%= link_to idea.title, idea_path(idea) %></td>
-        <td class="col-md-8"><%= idea.description %></td>
+        <td class = "col-md-2">
+          <%= link_to "+1", upvote_idea_path(idea), method: :post, class: "btn btn-primary btn-sm" %>
+          <b><%= pluralize(idea.votes.count, "vote") %></b>
+        </td>
+        <td class = "col-md-2"><b><%= link_to idea.title, idea_path(idea) %></b></td>
+        <td class = "col-md-6"><%= idea.description %></td>
+        <td class = "col-md-2">
+          <% if idea.editable_by?(current_user) %>
+            <%= link_to "Edit", edit_idea_path(idea), class: "btn btn-warning btn-sm" %>
+            <%= link_to "Delete", idea_path(idea), method: :delete, class: "btn btn-danger btn-sm" %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
+    </tbody>
   </table>
 </div>

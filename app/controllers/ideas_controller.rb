@@ -15,7 +15,7 @@ class IdeasController < ApplicationController
   end
 
   def create
-    @idea = Idea.new(idea_params)
+    @idea = current_user.ideas.new(idea_params)
     if @idea.save
       redirect_to ideas_path
     else
@@ -24,11 +24,11 @@ class IdeasController < ApplicationController
   end
 
   def edit
-    @idea = Idea.find(params[:id])
+    @idea = current_user.ideas.find(params[:id])
   end
 
   def update
-    @idea = Idea.find(params[:id])
+    @idea = current_user.ideas.find(params[:id])
 
     if @idea.update(idea_params)
       redirect_to ideas_path
@@ -38,7 +38,7 @@ class IdeasController < ApplicationController
   end
 
   def destroy
-    @idea = Idea.find(params[:id])
+    @idea = current_user.ideas.find(params[:id])
     @idea.destroy
     redirect_to ideas_path
   end
