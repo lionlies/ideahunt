@@ -46,7 +46,13 @@ class IdeasController < ApplicationController
   def upvote
     @idea= Idea.find(params[:id])
     @idea.votes.create
-    redirect_to ideas_path
+    redirect_to :back
+  end
+
+  def cancel_upvote
+    @idea = Idea.find(params[:id])
+    @idea.votes.last.delete
+    redirect_to :back
   end
 
   private
