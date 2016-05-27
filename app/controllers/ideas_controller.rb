@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
 
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :upvote, :downvote]
 
   def index
     @ideas = Idea.all

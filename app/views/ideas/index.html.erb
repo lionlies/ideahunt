@@ -9,15 +9,11 @@
     <% @ideas.each do |idea| %>
       <tr>
         <td class = "col-md-2">
-          <% if current_user.present? %>
-            <%= link_to "+1", upvote_idea_path(idea), method: :post, class: "btn btn-primary btn-xs" %>
-          <% end %>
+          <%= link_to "+1", upvote_idea_path(idea), method: :post, class: "btn btn-primary btn-xs" %>
           &nbsp
           <b><%= pluralize(idea.votes.count, "vote") %></b>
           &nbsp
-          <% if current_user.present? %>
-            <%= link_to "-1", downvote_idea_path(idea), method: :delete, class: "btn btn-default btn-xs" %>
-          <% end %>
+          <%= link_to "-1", downvote_idea_path(idea), method: :delete, class: "btn btn-default btn-xs" %>
         </td>
         <td class = "col-md-2">
           <b><%= link_to idea.title, idea_path(idea) %></b>
