@@ -8,14 +8,19 @@ class IdeasController < ApplicationController
 
   def show
     @idea = Idea.find(params[:id])
+    @comments = @idea.comments
+    @comment = @idea.comments.new
   end
 
   def new
     @idea = Idea.new
+    @idea.owner = current_user
   end
 
   def create
     @idea = current_user.ideas.new(idea_params)
+    @idea.owner = current_user
+
     if @idea.save
       redirect_to ideas_path
     else
@@ -45,11 +50,18 @@ class IdeasController < ApplicationController
 
   def upvote
     @idea= Idea.find(params[:id])
-    @idea.votes.create
-    redirect_to :back
+    if @idea.votes.create(user_id: current_user.id)
+      flash[:notice] = "Thank you for upvoting!"
+
+      # @vote = @idea.votes.create
+      redirect_to :back
+    else
+      flash[:notice] =  "You have already upvoted this!"
+      redirect_to :back
+    end
   end
 
-  def cancel_upvote
+  def downvote
     @idea = Idea.find(params[:id])
     @idea.votes.last.delete
     redirect_to :back

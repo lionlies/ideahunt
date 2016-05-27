@@ -4,10 +4,14 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   resources :ideas do
+
+    resources :comments
+
     member do
       post :upvote
-      delete :cancel_upvote
+      delete :downvote
     end
+
   end
 
   # You can have the root of your site routed with "root"
