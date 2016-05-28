@@ -63,7 +63,7 @@ class IdeasController < ApplicationController
 
   def downvote
     @idea = Idea.find(params[:id])
-    @idea.votes.last.delete
+    @idea.votes.last.destroy
     redirect_to :back
   end
 
